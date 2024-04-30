@@ -1,8 +1,19 @@
+"""
+This file is for our new theme: ?
+Create by: Miqayel Postoyan
+Date: 30 April
+"""
 import requests
 import time
 
 
 def print_cripto(data):
+    """
+    Function: print_cripto
+    Brief: print data crypto
+    Params: data
+    Return:	None
+    """
     for i in range(len(data)):
         print("Name: ", data[i]["name"])
         print("Symbol: ", data[i]["symbol"])
@@ -13,18 +24,34 @@ def print_cripto(data):
 
 
 def filter_name(datas, name):
+    """
+    Function: filter_name
+    Brief: print name crypto
+    Params: datas, name
+    Return:	name crypto
+    """
     return [i for i in datas if name.lower() in i["name"].lower()]
 
 def filter_value(datas, value):
+    """
+    Function: filter_value
+    Brief: print the cost of all cryptocurrencies is higher than value $
+    Params: datas, value
+    Return:	the cost of all cryptocurrencies is higher than value $
+    """
     return [i for i in datas if float(i["priceUsd"]) > value]
 
 
 def main():
-    url1 = "https://api.coincap.io/v2/assets"
-    params = {"limit": 20}
-    r = requests.get(url1, params=params)
-    data = r.json()["data"]
+    """
+    Function: main
+    Brief: Entry point
+    """
     while True:
+        url1 = "https://api.coincap.io/v2/assets"
+        params = {"limit": 20}
+        r = requests.get(url1, params=params)
+        data = r.json()["data"]
         print_cripto(data)
         cripto = input("Enter crypto name and price: ")
         if cripto.isalpha():
